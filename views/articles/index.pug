@@ -1,0 +1,10 @@
+html
+  head
+    title= title 
+  body
+    h1= message
+    h2= artid
+    ul
+    each article in articles
+        li= article.title
+        p= article.text

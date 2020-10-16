@@ -1,0 +1,14 @@
+html
+  head
+    title= title 
+  body
+    h1= message
+    h2= artid
+    form(action="/articles/artid" method="PATCH")
+        label(for='title') Title
+        input#title(type='text' name='title' placeholder='Enter Your Article Title')
+        br
+        label(for='text') Article Text
+        input#text(type="textarea" name="text" title="Enter Your Article Text ")
+        br
+        input(type="submit")

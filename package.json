@@ -1,0 +1,20 @@
+{
+  "name": "node_route",
+  "version": "1.0.0",
+  "description": "Using express route for routing",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gordon Hennesy",
+  "license": "ISC",
+  "dependencies": {
+    "better-sqlite3": "^7.1.1",
+    "body-parser": "^1.19.0",
+    "mongoose": "^5.10.9",
+    "pug": "^3.0.0",
+    "sqlite3": "^5.0.0"
+  },
+  "devDependencies": {},
+  "keywords": []
+}
