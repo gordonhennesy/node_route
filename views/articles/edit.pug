@@ -4,11 +4,18 @@ html
   body
     h1= message
     h2= artid
-    form(action="/articles/artid" method="PATCH")
+    form(action=`/articles/${artid}` method="POST")
         label(for='title') Title
-        input#title(type='text' name='title' placeholder='Enter Your Article Title')
+        input#title(type='text' 
+          name='title'
+          value= article.title
+        )
         br
         label(for='text') Article Text
-        input#text(type="textarea" name="text" title="Enter Your Article Text ")
+        input#text(
+          type="textarea" 
+          name="text" 
+          value= article.text 
+        )
         br
         input(type="submit")
