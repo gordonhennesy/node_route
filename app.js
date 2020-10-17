@@ -3,7 +3,8 @@ const app = express();
 const router = express.Router();
 const mongoose = require('mongoose');
 //const sqlite3 = require('sqlite3').verbose();
-const sqlite3 = require('better-sqlite3')('database.sqlite', []);;
+//const sqlite3 = require('better-sqlite3')('database.sqlite', []);;
+const db = require('better-sqlite3')('database.sqlite', []);
 bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
@@ -16,14 +17,14 @@ app.set('view engine', 'pug');
 function insert_article(title, text) {
   const sql = `INSERT into articles('title', 'text') VALUES('`+ title+`', '`+text+`');`;
   console.log(sql);
-  const db = require('better-sqlite3')('database.sqlite', []);
+  //const db = require('better-sqlite3')('database.sqlite', []);
 
   const articles = db.prepare(sql).run();
 //  console.log(articles);
   return;
 }
 function update_article(id, title, text) {
-  const db = require('better-sqlite3')('database.sqlite', []);
+  //const db = require('better-sqlite3')('database.sqlite', []);
   const sql = "UPDATE articles set title=?, text = ? WHERE id = ?";
   console.log(sql);
 
@@ -31,21 +32,15 @@ function update_article(id, title, text) {
   return;
 }
 function get_article(artId) {
-  const db = require('better-sqlite3')('database.sqlite', []);
-
   const article = db.prepare('SELECT * FROM articles WHERE id = ?').get(artId);
   console.log(article);
   return article;
 }
 function delete_article(artId) {
-  const db = require('better-sqlite3')('database.sqlite', []);
-
   db.prepare('DELETE FROM articles WHERE id = ?').run(artId);
   return;
 }
 function get_articles() {
-  const db = require('better-sqlite3')('database.sqlite', []);
-
   const articles = db.prepare('SELECT * FROM articles').all();
   return articles;
 }
@@ -55,7 +50,6 @@ app.get('/articles', function (req, res) {
   console.log('index articles');
   try {
     var articles = get_articles();
-    //console.log(articles);
     res.render('articles/index', { artid: req.params.artId, title: 'Articles', message: 'Show all articles', articles: articles })
   } catch (err) {
     console.log('get articles failed');
@@ -103,7 +97,6 @@ app.delete('/articles/:artId', function (req, res) {
   console.log('destroy article'+req.params.artId);
   delete_article(req.params.artId);
   res.redirect(301,'/articles');
-  //res.render('articles/delete', { artid: req.params.artId, title: 'Articles', message: 'Hello there, single article lover!' })
 });
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!' })
@@ -112,30 +105,3 @@ app.get('/', function (req, res) {
 app.listen(port, function () {
   console.log('Example app listening on port 8080!')
 });
-
-
-/*router.use(function (req,res,next) {
-  console.log('/' + req.method);
-  next();
-});
-//router.get('/', function(req,res){
-//  res.sendFile(path + 'index.html');
-//});
-
-router.get('/sharks', function(req,res){
-  res.sendFile(path + 'sharks.html');
-});
-*/
-/*
-app.use(express.static(path));
-app.use('/', router);
-*/
-//module.exports = Article;
-/**
-db.close((err) => {
-  if (err) {
-    return console.error(err.message);
-  }
-  console.log('Close the database connection.');
-});
-**/
