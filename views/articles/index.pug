@@ -3,4 +3,10 @@ html
     title= title
   body
     h1= message
-    a(href='/articles') Click here to go to articles app
+    h2= artid
+    a(href='/articles/create') Create new article
+    ul
+    each article in articles
+        li= article.title
+        p= article.text
+        button(onclick="window.location.href='/articles/"+article.id+"/edit';") Edit this article 
