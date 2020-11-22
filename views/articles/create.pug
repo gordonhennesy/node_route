@@ -1,18 +1,15 @@
 html
   head
     title= title 
+    link(rel="stylesheet", href="/css/style.css", type="text/css")
   body
     h1= message
     h2= artid
     form(action="/articles" method="POST")
         label(for='title') Title
-        input#title(type='text' name='title' 
-          placeholder='Enter your title'
-        )
+        input#title(type='text' name='title' placeholder='Enter your title')
         br
         label(for='text') Article Text
-        input#text(type="textarea" name="text" 
-          placeholder="Enter Your Article Text "
-        )
+        input#text(type="textarea" name="text" placeholder="Enter Your Article Text ")
         br
-        input(type="submit")
+        input(type="submit" value="Save")

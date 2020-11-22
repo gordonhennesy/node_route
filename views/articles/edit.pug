@@ -4,7 +4,9 @@ html
   body
     h1= message
     h2= artid
-    form(action=`/articles/${artid}` method="POST")
+    form(action=`/articles/` method="POST")
+        input(type='hidden' name='_method' value='put')
+        input(type='hidden' name='id' value= artid)
         label(for='title') Title
         input#title(type='text' 
           name='title'
@@ -18,4 +20,8 @@ html
           value= article.text 
         )
         br
-        input(type="submit")
+        input(type="submit" value="Save changes")
+    form(action=`/articles/` id="delete_form" method="POST")
+        input(type='hidden' name='_method' value='delete')
+        input(type='hidden' name='id' value= artid)
+        input(type="submit" value="Delete this article")
