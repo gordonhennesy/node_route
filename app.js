@@ -67,7 +67,7 @@ app.get('/articles', function (req, res) {
   }
 });
 app.get('/articles/:artId([0-9]+)', function (req, res) {
-  console.log('show article')
+  console.log('show article'+req.params.artId);
   article = get_article(req.params.artId);
   res.render('articles/show', { artid: req.params.artId, title: 'Articles', message: 'Show article '+req.params.artId, article: article}, )
 });
